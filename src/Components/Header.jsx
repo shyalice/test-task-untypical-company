@@ -1,14 +1,29 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-const Header = () => (
-    <AppBar position="fixed">
-        <Toolbar>
-            <Typography variant="h6">Test Task</Typography>
-        </Toolbar>
-    </AppBar>
-)
+const useStyles = makeStyles(() => ({
+    appBar: {
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "80px",
+        displayFlex: "flex",
+        justifyContent: "center"
+    }
+}));
+
+const Header = () => {
+    const classes = useStyles();
+    return(
+        <AppBar position="absolute" className={classes.appBar}>
+            <Toolbar>
+                <Typography variant="h4" className={classes.title}>Test Task</Typography>
+            </Toolbar>
+        </AppBar>
+    );
+}
 
 export default Header;

@@ -7,6 +7,8 @@ export const initialState = {
 const userReducer = (state = initialState, action) => {
     switch (action.type){
         case actions.ADD_USER:
+            action.user.id = state.users.length+1;
+            action.user.birthday = action.user.birthday.split("-").reverse().join(".")
             return {
                 ...state,
                 users: [action.user, ...state.users]
@@ -16,7 +18,7 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.filter(user => user.id !== action.userId)
             };
-        case actions.DELETE_USER:
+        case actions.UPDATE_USER:
             return {
                 ...state,
                 users: state.users.map(user => user.id === action.userID ? action.user : user)
