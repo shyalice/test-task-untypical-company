@@ -57,90 +57,99 @@ const UserInfo = (props) => {
     }
 
     return(
-        <Paper className={classes.paper}>
-            <div className={classes.title}>
-                <Typography variant="h5" style={{marginRight: "10px"}}>{user.name.toUpperCase()} {user.lastName.toUpperCase()} (#{user.id})</Typography>
-                <Tooltip title="Edit" onClick={() => setOpen(true)}>
-                    <IconButton aria-label="edit">
-                        <EditIcon />
-                    </IconButton>
-                </Tooltip>
-            </div>
-            <Breadcrumbs aria-label="breadcrumb">
-                <Link to="/">Home</Link>
-                <Typography color="textPrimary">{user.name[0].toUpperCase() + user.name.slice(1)} {user.lastName[0].toUpperCase() + user.lastName.slice(1)}</Typography>
-            </Breadcrumbs>
-            <List className={classes.root}>
-                {!!user.name && (
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar>
-                                <PersonIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary={`Name: ${user.name[0].toUpperCase() + user.name.slice(1)}`} />
-                    </ListItem>
-                )}
-                {!!user.lastName && (
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar>
-                                <PersonIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary={`Lastname: ${user.lastName[0].toUpperCase() + user.lastName.slice(1)}`} />
-                    </ListItem>
-                )}
-                {!!user.birthday && (
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar>
-                                <CakeIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary={`Birthday: ${user.birthday.split("-").reverse().join(".")}`} />
-                    </ListItem>
-                )}
-                {!!user.gender && (
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar>
-                                <WcIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary={`Gender: ${user.gender}`} />
-                    </ListItem>
-                )}
-                {!!user.phone && (
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar>
-                                <PhoneIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary={`Phone: ${user.phone}`} />
-                    </ListItem>
-                )}
-                {!!user.email && (
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar>
-                                <EmailIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary={`Email: ${user.email}`} />
-                    </ListItem>
-                )}
-            </List>
-            <UserModalField
-                title="Update User"
-                isOpen={isOpen}
-                handleClose={handleCloseEditModal}
-                handleChange={handleChangeEditedUser}
-                onClick={onEdit}
-                user={editedUser}
-			/>
-        </Paper>
+        <>
+            {!!user ? (
+                <Paper className={classes.paper}>
+                    <div className={classes.title}>
+                        <Typography variant="h5" style={{marginRight: "10px"}}>{user.name.toUpperCase()} {user.lastName.toUpperCase()} (#{user.id})</Typography>
+                        <Tooltip title="Edit" onClick={() => setOpen(true)}>
+                            <IconButton aria-label="edit">
+                                <EditIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </div>
+                    <Breadcrumbs aria-label="breadcrumb">
+                        <Link to="/">Home</Link>
+                        <Typography color="textPrimary">{user.name[0].toUpperCase() + user.name.slice(1)} {user.lastName[0].toUpperCase() + user.lastName.slice(1)}</Typography>
+                    </Breadcrumbs>
+                    <List className={classes.root}>
+                        {!!user.name && (
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <PersonIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary={`Name: ${user.name[0].toUpperCase() + user.name.slice(1)}`} />
+                            </ListItem>
+                        )}
+                        {!!user.lastName && (
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <PersonIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary={`Lastname: ${user.lastName[0].toUpperCase() + user.lastName.slice(1)}`} />
+                            </ListItem>
+                        )}
+                        {!!user.birthday && (
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <CakeIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary={`Birthday: ${user.birthday.split("-").reverse().join(".")}`} />
+                            </ListItem>
+                        )}
+                        {!!user.gender && (
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <WcIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary={`Gender: ${user.gender}`} />
+                            </ListItem>
+                        )}
+                        {!!user.phone && (
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <PhoneIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary={`Phone: ${user.phone}`} />
+                            </ListItem>
+                        )}
+                        {!!user.email && (
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <EmailIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary={`Email: ${user.email}`} />
+                            </ListItem>
+                        )}
+                    </List>
+                    <UserModalField
+                        title="Update User"
+                        isOpen={isOpen}
+                        handleClose={handleCloseEditModal}
+                        handleChange={handleChangeEditedUser}
+                        onClick={onEdit}
+                        user={editedUser}
+                    />
+                </Paper>
+            ) : (
+                <div>
+                    <Typography variant="h4">User Not Found...</Typography>
+                </div>
+            )}
+            
+        </>
     )
     
 };

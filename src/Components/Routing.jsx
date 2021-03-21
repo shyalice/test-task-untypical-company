@@ -8,7 +8,7 @@ const Routing = () => (
     <Switch>
         <Route path="/" exact component={Users}/>
         <Route path={`/user/:id`} exact component={UserInfo}/>
-        {/* <Route component={NotFound} /> */}
+        <Route component={NotFound} />
     </Switch>
 );
 
