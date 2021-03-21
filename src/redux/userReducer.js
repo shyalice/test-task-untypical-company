@@ -2,9 +2,9 @@ import * as actions from "./actionTypes";
 
 export const initialState = {
     users: [
-        {id: 3, name: "valery", lastName: "subbotin", birthday: "19.06.1999"},
-        {id: 2 ,name: "sasha", lastName: "karpov", birthday: "21.03.1984"},
-        {id: 1 ,name: "alisa", lastName: "tihonova", birthday: "06.11.2002"},
+        {id: 3, name: "valery", lastName: "subbotin", birthday: "19.06.1999", gender: "male"},
+        {id: 2 ,name: "sasha", lastName: "karpov", birthday: "21.03.1984", gender: "male"},
+        {id: 1 ,name: "alisa", lastName: "tihonova", birthday: "06.11.2002", gender: "female"},
     ]
 };
 

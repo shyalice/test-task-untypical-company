@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 import {useState} from "react";
 import {useSelector} from "react-redux"
 import {makeStyles} from '@material-ui/core/styles';
@@ -10,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
+import InfoIcon from '@material-ui/icons/Info';
 
 import UsersListTableHeader from "../../Components/User/UsersListTableHeader";
 import UsersListTableToolBar from "../../Components/User/UsersListTableToolBar";
@@ -54,13 +56,25 @@ function stableSort(array, comparator) {
 }
 
 const UsersList = () => {
-	const users = useSelector(state => state.user.users);
+	const [gender, setGender] = useState(null)
+	const users = genderFilter(useSelector(state => state.user.users), gender);
 	const classes = useStyles();
 	const [order, setOrder] = useState("desc");
 	const [orderBy, setOrderBy] = useState("id");
 	const [selected, setSelected] = useState([]);
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
+
+	function genderFilter(users, gender){
+		switch(gender){
+			case "male":
+				return users.filter(user => user.gender === "male");
+			case "female":
+				return users.filter(user => user.gender === "female");
+			default:
+				return users
+		}
+	}
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === 'asc';
@@ -106,7 +120,7 @@ const UsersList = () => {
 		setSelected(newSelected);
 	};
 
-	const handleDeleteButton = () =>{
+	const resetSelect = () =>{
 		setSelected([]);
 	}
 
@@ -117,7 +131,7 @@ const UsersList = () => {
 	return (
 		<div className={classes.root}>
 			<Paper className={classes.paper}>
-				<UsersListTableToolBar selected={selected} handleDeleteButton={handleDeleteButton}/>
+				<UsersListTableToolBar selected={selected} resetSelect={resetSelect} gender={gender} setGender={setGender}/>
 				<TableContainer component={Paper}>
 				<Table className={classes.table} size="small">
 					<UsersListTableHeader
@@ -138,17 +152,19 @@ const UsersList = () => {
 							return (
 								<TableRow
 									hover
-									onClick={(event) => handleClick(event, user.id)}
 									role="checkbox"
 									aria-checked={isItemSelected}
 									tabIndex={-1}
 									key={user.id}
 									selected={isItemSelected}
 								>
-									<TableCell padding="checkbox"><Checkbox checked={isItemSelected} inputProps={{ 'aria-labelledby': labelId }}/></TableCell>
+									<TableCell onClick={(event) => handleClick(event, user.id)} padding="checkbox"><Checkbox checked={isItemSelected} inputProps={{ 'aria-labelledby': labelId }}/></TableCell>
 									<TableCell component="th" id={labelId} scope="row">{user.id}</TableCell>
 									<TableCell>{user.name} {user.lastName}</TableCell>
 									<TableCell>{user.birthday}</TableCell>
+									<TableCell style={{borderTop: "1px solid rgba(224, 224, 224, 1)"}}>
+										<Link to={`/user/${user.id}`}><InfoIcon color="primary" /></Link>
+									</TableCell>
 								</TableRow>
 							);
 						})}

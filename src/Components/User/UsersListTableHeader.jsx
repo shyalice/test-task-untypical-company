@@ -8,7 +8,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 const headCells = [
     { id: 'id', label: "Id" },
     { id: 'name', label: "Name" },
-    { id: 'birthday', label: "Birthday" }
+    { id: 'birthday', label: "Birthday" },
 ];
 
 const UsersListTableHeader = (props) =>{
