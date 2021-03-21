@@ -161,7 +161,7 @@ const UsersList = () => {
 									<TableCell onClick={(event) => handleClick(event, user.id)} padding="checkbox"><Checkbox checked={isItemSelected} inputProps={{ 'aria-labelledby': labelId }}/></TableCell>
 									<TableCell component="th" id={labelId} scope="row">{user.id}</TableCell>
 									<TableCell>{user.name} {user.lastName}</TableCell>
-									<TableCell>{user.birthday}</TableCell>
+									<TableCell>{user.birthday.split("-").reverse().join(".")}</TableCell>
 									<TableCell style={{borderTop: "1px solid rgba(224, 224, 224, 1)"}}>
 										<Link to={`/user/${user.id}`}><InfoIcon color="primary" /></Link>
 									</TableCell>

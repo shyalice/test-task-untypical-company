@@ -6,7 +6,7 @@ import NotFound from "./NotFound";
  
 const Routing = () => (
     <Switch>
-        <Route path="/" component={Users}/>
+        <Route path="/" exact component={Users}/>
         <Route path={`/user/:id`} exact component={UserInfo}/>
         {/* <Route component={NotFound} /> */}
     </Switch>

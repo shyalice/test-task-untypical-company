@@ -12,7 +12,6 @@ const userReducer = (state = initialState, action) => {
     switch (action.type){
         case actions.ADD_USER:
             action.user.id = state.users.length+1;
-            action.user.birthday = action.user.birthday.split("-").reverse().join(".")
             return {
                 ...state,
                 users: [action.user, ...state.users]
