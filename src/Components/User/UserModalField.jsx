@@ -71,7 +71,7 @@ const UserModalField = (props) => {
                                 </ButtonGroup>
                             </>
                             <TextField value={user.phone} onChange={(e) => handleChange("phone", e.target.value)} label="Phone" type="number"/>
-                            <TextField value={user.email} onChange={(e) => handleChange("email", e.target.value)} label="Email"/>
+                            <TextField value={user.email.split(' ').join('')} onChange={(e) => handleChange("email", e.target.value)} label="Email"/>
                             {!!user.name && !!user.lastName && !!user.birthday && !!user.gender && (
                                 <Button variant="contained" onClick={() => onClick()}>{title}</Button>
                             )}

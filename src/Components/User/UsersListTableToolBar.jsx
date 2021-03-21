@@ -16,22 +16,35 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 const useToolbarStyles = makeStyles((theme) => ({
     root: {
-      paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(1),
+        position: "relative",
+        padding: theme.spacing(2),
+        paddingRight: theme.spacing(1),
+        paddingTop: theme.spacing(2),
+        paddingBottom: theme.spacing(2),
+        alignItems: "flex-start"
     },
     highlight:
-      theme.palette.type === 'light'
+        theme.palette.type === 'light'
         ? {
             color: theme.palette.secondary.main,
             backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-          }
+            }
         : {
             color: theme.palette.text.primary,
             backgroundColor: theme.palette.secondary.dark,
-          },
+            },
     title: {
-      flex: '1 1 100%',
+        flex: '1 1 100%',
     },
+    header: {
+        display: "flex",
+        flexDirection: "column",
+    },
+    filter: {
+        position: "absolute",
+        top: "10%",
+        left: "90%"
+    }
 }));
 
 const UsersListTableToolBar = (props) => {
@@ -59,7 +72,19 @@ const UsersListTableToolBar = (props) => {
             {selected.length > 0 ? (
                 <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">{selected.length} selected</Typography>
             ) : (
-                <Typography className={classes.title} variant="h6" id="tableTitle" component="div">Users ({users.length})</Typography>
+                <div className={classes.header}>
+                    <Typography className={classes.title} variant="h6" component="div" style={{marginBottom: "10px"}}>Users ({users.length})</Typography>
+                    {isOpenFilter && (
+                        <ButtonGroup color="primary">
+                            <Button variant="outlined" style={gender === "male" ? {backgroundColor: "#e6e6e6"} : {backgroundColor: "#fff"}}
+                                onClick={() => setGender("male")}>Male</Button>
+                            <Button variant="outlined" style={gender === "female" ? {backgroundColor: "#e6e6e6"} : {backgroundColor: "#fff"}}
+                                onClick={() => setGender("female")}>Female</Button>
+                            <Button variant="outlined" style={gender === null ? {backgroundColor: "#e6e6e6"} : {backgroundColor: "#fff"}}
+                                onClick={() => setGender(null)}>All</Button>
+                        </ButtonGroup>
+                    )}
+                </div>
             )}
 
             {selected.length > 0 ? (
@@ -78,21 +103,11 @@ const UsersListTableToolBar = (props) => {
                     </Tooltip>
                 </>
             ) : (
-                <Tooltip onClick={() => setOpenFilter(!isOpenFilter)} title="Filter list">
+                <Tooltip className={classes.filter} onClick={() => setOpenFilter(!isOpenFilter)} title="Filter list">
                     <IconButton aria-label="filter list">
                         <FilterListIcon />
                     </IconButton>
                 </Tooltip>
-            )}
-            {isOpenFilter && (
-                <ButtonGroup color="primary">
-                    <Button variant="outlined" style={gender === "male" ? {backgroundColor: "#e6e6e6"} : {backgroundColor: "#fff"}}
-                        onClick={() => setGender("male")}>Male</Button>
-                    <Button variant="outlined" style={gender === "female" ? {backgroundColor: "#e6e6e6"} : {backgroundColor: "#fff"}}
-                        onClick={() => setGender("female")}>Female</Button>
-                    <Button variant="outlined" style={gender === null ? {backgroundColor: "#e6e6e6"} : {backgroundColor: "#fff"}}
-                        onClick={() => setGender(null)}>All</Button>
-                </ButtonGroup>
             )}
         </Toolbar>
     );
